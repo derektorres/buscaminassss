@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+from entities.winner import Winner
 
 app = Flask(__name__)
 
@@ -6,6 +7,17 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/winner',methods=['POST'])
+def save_winner():
+    data = request.get_json()
+    winner = Winner(id=0, name=data['name'], email=data['email'])
+    winner.save()
+    
+    if winner.id != 0:
+        return jsonify ({"succes": True, "id": winner.id}), 201
+    else:
+        return jsonify({"succes": False}), 500
+      
 
 @app.route('/')
 def home():

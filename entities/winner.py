@@ -5,10 +5,22 @@ class Winner:
         self.name = name
         self.email = email
     def save(self):
-        connection = get_connection()
-        cursor = connection.cursor()
-        
-        query = "INSERT INTO winners(name, email) VALUES (%s, %s)"
-        cursor.execute(query, (self.name, self.email))
+        try:
+            connection = get_connection()
+            cursor = connection.cursor()
+            
+            query = "INSERT INTO winners(name, email) VALUES (%s, %s)"
+            cursor.execute(query, (self.name, self.email))
+            connection.commit()
+            
+            self.id = cursor.lastrowid
+            return self.id
+        except Exception as ex:
+            print("error al guardar registro: ", ex)
+            return 0
+        finally:
+            cursor.close()
+            connection.close()
+    
         
         
