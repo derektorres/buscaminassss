@@ -4,6 +4,7 @@ class Winner:
         self.id = id
         self.name = name
         self.email = email
+        
     def save(self):
         try:
             connection = get_connection()

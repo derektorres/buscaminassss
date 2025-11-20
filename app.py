@@ -14,9 +14,9 @@ def save_winner():
     winner.save()
     
     if winner.id != 0:
-        return jsonify ({"succes": True, "id": winner.id}), 201
+        return jsonify ({"success": True, "id": winner.id}), 201
     else:
-        return jsonify({"succes": False}), 500
+        return jsonify({"success": False}), 500
       
 
 @app.route('/')
