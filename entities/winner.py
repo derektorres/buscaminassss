@@ -23,5 +23,26 @@ class Winner:
             cursor.close()
             connection.close()
     
+    @classmethod
+    def get_all(cls):
+        winners = []
+        try:
+            connection = get_connection()
+            cursor = connection.cursor()
+            
+            query = "SELECT id, name, email FROM winners"
+            cursor.execute(query)
+            
+            rows = cursor.fetchall()
+            
+            for row in rows:
+                winner = cls(id = row[0], name = row[1], email = row[2])
+                winners.append(winner)
+            return winners
         
-        
+        except Exception as ex:
+            print("error al obtener registro: ", ex)
+            return []
+        finally:
+            cursor.close()
+            connection.close()

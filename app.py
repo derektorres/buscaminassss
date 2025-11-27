@@ -19,6 +19,10 @@ def save_winner():
         return jsonify({"success": False}), 500
       
 
+@app.route('/winner', methods=['GET'])
+def get_winners():
+    return render_template('/winners.html', winners = Winner.get_all())
+
 @app.route('/')
 def home():
     return render_template('index.html')

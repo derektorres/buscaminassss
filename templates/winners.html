@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+
+<section id="snippet-3" class="wrapper bg-light wrapper-border">
+  <div class="container pt-5 pb-13">
+
+    <h2 class="display-4 mb-3 text-center">Buscaminas Cheems</h2>
+    <p class="lead text-center mb-10 px-md-16 px-lg-0">Destapa cada una de las cartas evitando toparte con el Cheems malvado o perderás.</p>
+
+    <!-- Tabla de ganadores -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if Winners %}
+          {% for w in Winners %}
+            <tr>
+              <td>{{ w.email }}</td>
+              <td>{{ w.name }}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="2" class="text-center">No hay ganadores por el momento</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+{% include 'footer.html' %}
